@@ -3,7 +3,7 @@
     <NuxtLayout class="relative">
       <NMessageProvider>
         <NuxtPage class="min-h-screen" />
-        <div class="md:hidden fixed !top-24 -z-1 logo isExactActive">
+        <div class="md:hidden fixed !top-24 -z-1 logo">
           <span class="!text-[60px] !leading-10">
             What's the program?
           </span>
@@ -34,9 +34,5 @@ const theme = {
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
-
-.isExactActive span {
-  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #8644ff, 0 0 0.5em #8644ff, 0 0 0.1em #8644ff, 0 10px 3px #000;
 }
 </style>

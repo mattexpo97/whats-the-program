@@ -1,6 +1,20 @@
-# Nuxt 3 Minimal Starter
+# What's the program?
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Live demo
+
+You can see a live demo [here](https://mattexpo97.github.io/whats-the-program/)
+
+
+## Packages used
+
+Nuxt 3
+VueUse
+Naive UI
+UnoCSS
+Pinia
+Pinia Persisted Storage
+Unplugin icons
+
 
 ## Setup
 
@@ -59,5 +73,3 @@ pnpm run preview
 # yarn
 yarn preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
