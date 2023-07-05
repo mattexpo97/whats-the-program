@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    baseURL: '/whats-the-program/'
+    baseURL: '/whats-the-program/',
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   devtools: { enabled: true },
   modules: [

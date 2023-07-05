@@ -1,7 +1,7 @@
 <template>
-  <div class="flip flip-vertical w-[315px] overflow-y-hidden">
+  <div class="flip flip-vertical w-[280px] overflow-y-hidden">
     <div
-      class="front h-[445px]"
+      class="front h-[380px]"
       :style="`background-image: url(${props.show.image?.medium ? props.show.image?.medium : 'https://via.placeholder.com/410x590.png?text=No+image'})`"
     />
     <div class="back min-h-full relative py-2 px-4">
@@ -19,10 +19,12 @@
           @click="ShowStore.addToFavorites(props.show)"
         />
       </div>
-      <h1 :class="[props.show.name.length < 12 ? 'text-xl' : 'text-2xl', 'text-shadow']">{{ props.show.name }}</h1>
+      <div class="logo !text-left !mt-2">
+        <span class="!leading-10">{{ props.show.name }}</span>
+      </div>
       <div class="">
         <div class="flex items-center">
-          <div class="inline-flex items-center mr-1.5">
+          <div class="inline-flex items-center mr-1.5 mt-2">
             <Icon
               name="material-symbols:star"
               class="mr-1"
@@ -37,14 +39,12 @@
           </div>
         </div>
         <div class="">
-          <span>
             {{ formatDate(props.show.premiered) }} - {{ props.show.ended ? formatDate(props.show.ended) : 'today' }}
-          </span>
         </div>
         <p
           v-if="props.show.summary?.length"
           v-html="props.show.summary"
-          class="max-h-[280px] overflow-y-scroll text-xs"
+          class="max-h-[240px] md:max-h-[200px] overflow-y-scroll text-xs"
         />
       </div>
     </div>
@@ -78,7 +78,7 @@ function formatDate (date) {
     display: block;
     transition-timing-function: cubic-bezier(.2, .2, .2, 1.5);
     transition-duration: .5s;
-    transition-property: transform, opacity;
+    transition-property: transform;
   }
 
   >.front {
@@ -100,7 +100,7 @@ function formatDate (date) {
     }
 
     >.back {
-      opacity: 1;
+      opacity: 0.9;
       transform: rotateY(0deg);
     }
   }
@@ -112,6 +112,9 @@ function formatDate (date) {
 
     &:hover {
       >.front {
+        background-image: unset !important;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px) !important;
         transform: rotateX(180deg);
       }
 
@@ -136,7 +139,6 @@ function formatDate (date) {
     width: inherit;
     background-size: cover !important;
     background-position: center !important;
-    background: #313131;
     border-radius: 10px;
 
     p {
@@ -145,6 +147,11 @@ function formatDate (date) {
       color: #999;
     }
   }
+}
+
+h1 {
+  font-family: 'Vibur';
+  font-size: 2rem;
 }
 
 .text-shadow {

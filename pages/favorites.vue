@@ -1,11 +1,14 @@
 <template>
-  <div class="overflow-y-hidden">
-    <div class="gap-4 grid grid-cols-1 md:grid-cols-4 px-8 my-6 md:my-12">
-        <n-input v-model:value="search" type="text" placeholder="Search" clearable />
-        <n-select v-model:value="sortBy" :options="sortOptions" />
-        <n-select v-model:value="runtimeFilter" :options="runtimeOptions" />
-        <n-select v-model:value="genreFilter" :options="genreOptions" placeholder="Genres" clearable multiple />
-    </div>
+  <div class="overflow-y-hidden relative">
+    <ShowsFilters
+      :sortOptions="sortOptions"
+      :runtimeOptions="runtimeOptions"
+      :genreOptions="genreOptions"
+      @updatedSearch="search = $event"
+      @updatedSortBy="sortBy = $event"
+      @updatedRuntimeFilter="runtimeFilter = $event"
+      @updatedGenreFilter="genreFilter = $event"
+    />
     <div
       v-if="ShowStore.favorites?.length && filteredAndSortedShows?.length"
       class="flex items-center snap-x space-x-8 snap-mandatory overflow-scroll px-8"
@@ -20,20 +23,19 @@
     </div>
     <div
       v-else
-      class="mt-40"
+      class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
     >
-      <p v-if="!ShowStore.favorites?.length" class="w-full text-4xl text-center text-white">
-        Vous n'avez pas encore de favoris <br> :(
+      <p v-if="!ShowStore.favorites?.length" class="w-full text-4xl text-center text-white px-8 -translate-y-20">
+        You don't have any favorites yet <br> :(
       </p>
-      <p v-else class="w-full text-4xl text-center text-white">
-        Aucun résultat ne correspond à votre recherche <br> :(
+      <p v-else class="w-full text-4xl text-center text-white px-8 -translate-y-20">
+        No results were found for your search <br> :(
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { NSelect, NInput } from 'naive-ui'
 import { useShowStore } from '~/stores/shows'
 
 const ShowStore = useShowStore()

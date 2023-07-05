@@ -1,14 +1,17 @@
 <template>
   <div class="overflow-y-hidden">
-    <div class="gap-4 grid grid-cols-1 md:grid-cols-4 px-8 my-6 md:my-12">
-        <n-input v-model:value="search" type="text" placeholder="Search" @update:value="searchShow" clearable />
-        <n-select v-model:value="sortBy" :options="sortOptions" />
-        <n-select v-model:value="runtimeFilter" :options="runtimeOptions" />
-        <n-select v-model:value="genreFilter" :options="genreOptions" placeholder="Genres" clearable multiple />
-    </div>
+    <ShowsFilters
+      :sortOptions="sortOptions"
+      :runtimeOptions="runtimeOptions"
+      :genreOptions="genreOptions"
+      @updatedSearch="search = $event, searchShow()"
+      @updatedSortBy="sortBy = $event"
+      @updatedRuntimeFilter="runtimeFilter = $event"
+      @updatedGenreFilter="genreFilter = $event"
+    />
     <div
       v-if="filteredAndSortedShows?.length"
-      class="flex items-center snap-x space-x-8 snap-mandatory overflow-scroll px-8"
+      class="flex items-center snap-x space-x-8 snap-mandatory overflow-scroll px-8 no-scrollbar"
     >
       <ShowsItem
         v-for="show in filteredAndSortedShows"
@@ -23,15 +26,13 @@
       class="mt-40"
     >
       <p class="w-full text-4xl text-center text-white">
-        Aucun résultat ne correspond à votre recherche <br> :(
+        No results were found for your search <br> :(
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { NSelect, NInput } from 'naive-ui'
-
 const { sort } = useHelpers()
 const { filterByRuntime } = useHelpers()
 const { fetchShows } = useApi()
@@ -86,3 +87,16 @@ const genreOptions = computed(() => {
 })
 
 </script>
+
+<style scoped>
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
