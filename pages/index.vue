@@ -15,7 +15,6 @@
     >
       <ShowsItem
         v-for="show in filteredAndSortedShows"
-        v-memo="[]"
         :key="show.id"
         class="snap-center shrink-0"
         :show="show"
